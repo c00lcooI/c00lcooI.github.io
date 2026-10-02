@@ -1,0 +1,115 @@
+<!doctype html><html lang="en"><link rel="icon" type="image/svg+xml" href="favicon.svg"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Merged Audio Tools</title><style>:root {
+    --bg: #121214;
+    --surface: #1e1e24;
+    --text: #f4f4f6;
+    --accent: #7c4dff;
+    --accent-alt: #4db8ff;
+}
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+}
+.card {
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+@media (max-width: 768px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
+h1, h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+h1 { font-size: 1.6rem; text-align: center; }
+h2 { font-size: 1.3rem; border-bottom: 1px solid #3f3f4a; padding-bottom: 0.5rem; }
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+select {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    background-color: #2a2a32;
+    color: var(--text);
+    border: 1px solid #3f3f4a;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+select:focus {
+    border-color: var(--accent);
+}
+.row { display: flex; gap: 0.5rem; }
+.result-panel {
+    background-color: #2a2a32;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 1.5rem;
+    transition: opacity 0.3s ease;
+}
+.result-panel.alt-accent {
+    border-left-color: var(--accent-alt);
+}
+.target-key {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+.step-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    counter-reset: step-counter;
+}
+.step-list li {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+.step-list li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+    color: var(--accent-alt);
+}
+.highlight {
+    color: var(--accent-alt);
+    font-weight: bold;
+}
+.fade {
+    opacity: 0.5;
+}</style><div class="wrapper"><h1>Audio Production Tools</h1><div class="card"><h2>Modulation Calculator</h2><label for="tonality">Tonality</label> <select id="tonality"><option value="major">Major Keys<option value="minor">Minor Keys</select> <label for="startKey">Starting Key</label> <select id="startKey"></select><div class="result-panel" id="resultCard"><div class="target-key" id="targetKey">D♭ Major (5 Flats)</div><div class="transition-chord" id="transitionChord">Transition: A♭7 -> D♭</div></div></div><div class="card grid-layout"><div><h2>Ornament Config</h2><label for="keySignature">Key Signature</label> <select id="keySignature"><option value="C,Major">C Major<option value="G,Major">G Major<option value="D,Major">D Major<option value="A,Major">A Major<option value="E,Major">E Major<option value="B,Major">B Major<option value="F#,Major">F# Major<option value="C#,Major">C# Major<option value="F,Major">F Major<option value="B♭,Major">B♭ Major<option value="E♭,Major">E♭ Major<option value="A♭,Major">A♭ Major<option value="D♭,Major">D♭ Major<option value="G♭,Major">G♭ Major<option value="C♭,Major">C♭ Major<option value="A,Minor">A Minor<option value="E,Minor">E Minor<option value="B,Minor">B Minor<option value="F#,Minor">F# Minor<option value="C#,Minor">C# Minor<option value="G#,Minor">G# Minor<option value="D#,Minor">D# Minor<option value="A#,Minor">A# Minor<option value="D,Minor">D Minor<option value="G,Minor">G Minor<option value="C,Minor">C Minor<option value="F,Minor">F Minor<option value="B♭,Minor">B♭ Minor<option value="E♭,Minor">E♭ Minor<option value="A♭,Minor">A♭ Minor</select> <label for="startNoteName">.mscz Starting Note</label><div class="row"><select id="startNoteName"><option value="C">C<option value="C#">C#<option value="D♭">D♭<option value="D">D<option value="E♭">E♭<option value="E">E<option value="F">F<option value="F#">F#<option value="G♭">G♭<option value="G">G<option value="G#">G#<option value="A♭">A♭<option value="A">A<option value="B♭">B♭<option value="B">B</select> <select id="startNoteOctave"><option value="0">0<option value="1">1<option value="2">2<option value="3">3<option value="4" selected>4<option value="5">5<option value="6">6<option value="7">7<option value="8">8</select></div><label for="intervalAbove">Interval Above</label> <select id="intervalAbove"><option value="Auto">Auto (diatonic)<option value="1">Minor second<option value="2">Major second<option value="3">Augmented second</select> <label for="intervalBelow">Interval Below</label> <select id="intervalBelow"><option value="Auto">Auto (diatonic)<option value="1">Minor second<option value="2">Major second<option value="3">Augmented second</select></div><div class="result-panel alt-accent"><h2>Correction Guide</h2><ul class="step-list" id="guideSteps"></ul></div></div></div><script>const modulations={major:[{start:"C Major (0)",target:"D♭ Major (5 Flats)",trans:"A♭7 -> D♭"},{start:"D♭ Major (5 Flats)",target:"D Major (2 Sharps)",trans:"A7 -> D"},{start:"D Major (2 Sharps)",target:"E♭ Major (3 Flats)",trans:"B♭7 -> E♭"},{start:"E♭ Major (3 Flats)",target:"E Major (4 Sharps)",trans:"B7 -> E"},{start:"E Major (4 Sharps)",target:"F Major (1 Flat)",trans:"C7 -> F"},{start:"F Major (1 Flat)",target:"G♭ Major (6 Flats)",trans:"D♭7 -> G♭"},{start:"G♭ Major (6 Flats)",target:"G Major (1 Sharp)",trans:"D7 -> G"},{start:"G Major (1 Sharp)",target:"A♭ Major (4 Flats)",trans:"E♭7 -> A♭"},{start:"A♭ Major (4 Flats)",target:"A Major (3 Sharps)",trans:"E7 -> A"},{start:"A Major (3 Sharps)",target:"B♭ Major (2 Flats)",trans:"F7 -> B♭"},{start:"B♭ Major (2 Flats)",target:"B Major (5 Sharps)",trans:"F#7 -> B"},{start:"B Major (5 Sharps)",target:"C Major (0)",trans:"G7 -> C"}],minor:[{start:"A Minor (0)",target:"B♭ Minor (5 Flats)",trans:"F7 -> B♭m"},{start:"B♭ Minor (5 Flats)",target:"B Minor (2 Sharps)",trans:"F#7 -> Bm"},{start:"B Minor (2 Sharps)",target:"C Minor (3 Flats)",trans:"G7 -> Cm"},{start:"C Minor (3 Flats)",target:"C# Minor (4 Sharps)",trans:"G#7 -> C#m"},{start:"C# Minor (4 Sharps)",target:"D Minor (1 Flat)",trans:"A7 -> Dm"},{start:"D Minor (1 Flat)",target:"E♭ Minor (6 Flats)",trans:"B♭7 -> E♭m"},{start:"E♭ Minor (6 Flats)",target:"E Minor (1 Sharp)",trans:"B7 -> Em"},{start:"E Minor (1 Sharp)",target:"F Minor (4 Flats)",trans:"C7 -> Fm"},{start:"F Minor (4 Flats)",target:"F# Minor (3 Sharps)",trans:"C#7 -> F#m"},{start:"F# Minor (3 Sharps)",target:"G Minor (2 Flats)",trans:"D7 -> Gm"},{start:"G Minor (2 Flats)",target:"G# Minor (5 Sharps)",trans:"D#7 -> G#m"},{start:"G# Minor (5 Sharps)",target:"A Minor (0)",trans:"E7 -> Am"}]},tonalitySelect=document.getElementById("tonality"),startKeySelect=document.getElementById("startKey"),resultCard=document.getElementById("resultCard"),targetKeyEl=document.getElementById("targetKey"),transitionChordEl=document.getElementById("transitionChord");function populateKeys(){const t=tonalitySelect.value,a=modulations[t];startKeySelect.innerHTML="",a.forEach((t,a)=>{const e=document.createElement("option");e.value=a,e.textContent=t.start,startKeySelect.appendChild(e)}),updateResult()}function updateResult(){resultCard.classList.add("fade"),setTimeout(()=>{const t=tonalitySelect.value,a=startKeySelect.value,e=modulations[t][a];targetKeyEl.textContent=e.target,transitionChordEl.textContent="Transition: "+e.trans,resultCard.classList.remove("fade")},150)}tonalitySelect.addEventListener("change",populateKeys),startKeySelect.addEventListener("change",updateResult),populateKeys();const pitchNames=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"],majorIntervals=[0,2,4,5,7,9,11],minorIntervals=[0,2,3,5,7,8,10];function getPitchIndex(t){const a={"D♭":"C#","E♭":"D#","G♭":"F#","A♭":"G#","B♭":"A#","C♭":"B"}[t]||t;return pitchNames.indexOf(a)}function getNoteName(t){const a=t%12,e=Math.floor(t/12)-1,r=document.getElementById("keySignature").value.split(",")[0],n=["F","B♭","E♭","A♭","D♭","G♭","C♭","d","g","c","f"].some(t=>r.toLowerCase()===t.toLowerCase());let s=pitchNames[a];if(n){const t={"C#":"D♭","D#":"E♭","F#":"G♭","G#":"A♭","A#":"B♭"};t[s]&&(s=t[s])}return s+e}function calculateGuide(){const t=document.getElementById("keySignature").value.split(","),a=t[0],e=t[1],r=document.getElementById("startNoteName").value,n=parseInt(document.getElementById("startNoteOctave").value,10),s=document.getElementById("intervalAbove").value,o=document.getElementById("intervalBelow").value,l=getPitchIndex(a),i=12*(n+1)+getPitchIndex(r),c="Major"===e?majorIntervals:minorIntervals,u=[];for(let t=-1;t<=9;t++)for(let a=0;a<c.length;a++){const e=12*(t+1)+l+c[a];e>=0&&e<=127&&u.push(e)}u.sort((t,a)=>t-a);let d=i+1,g=i-1;for(let t=0;t<u.length;t++)if(u[t]>i){d=u[t];break}for(let t=u.length-1;t>=0;t--)if(u[t]<i){g=u[t];break}const m=d,h=i,M=g,p=i;let F,E;F="Auto"===s?d:i+parseInt(s,10),E="Auto"===o?g:i-parseInt(o,10);const y=i,B=i;function S(t,a,e){const r=getNoteName(a),n=getNoteName(e);return a===e?`Leave the ${t} note as <span class="highlight">${n}</span>.`:`Change the ${t} note from ${r} to <span class="highlight">${n}</span>.`}const C=["Open your MIDI file in your DAW or MIDI editor.",`Find the 4-note ornament cluster where the first note starts as <span class="highlight">${getNoteName(m)}</span>. If this note does not match your screen, adjust your inputs above to align with your actual track data.`,S("1st",m,F),S("2nd",h,y),S("3rd",M,E),S("4th",p,B),"Save the MIDI file and enjoy!"];document.getElementById("guideSteps").innerHTML=C.map(t=>`<li>${t}</li>`).join("")}document.querySelectorAll("select").forEach(t=>{t.addEventListener("change",calculateGuide)}),calculateGuide()</script>
