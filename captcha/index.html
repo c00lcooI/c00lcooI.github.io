@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Verification</title>
+    <!-- Load the official Google reCAPTCHA V2 Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <style>
+        /* Remove default margins, scrollbars, and backgrounds */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: transparent;
+            
+            /* Center the widget vertically and horizontally */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Enforce absolute removal of any native form or document spacing */
+        form {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        // Callback function executed automatically upon successful token generation
+        function onCaptchaSuccess(token) {
+            console.log(token);
+        }
+    </script>
+</head>
+<body>
+
+    <form action="#" method="POST">
+        <div class="g-recaptcha" 
+             data-sitekey="6LcMuOgtAAAAABTBMVbBr-xe_HY-k3ZoylgrWsIH" 
+             data-callback="onCaptchaSuccess">
+        </div>
+    </form>
+
+</body>
+</html>
